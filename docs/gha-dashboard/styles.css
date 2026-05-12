@@ -44,6 +44,19 @@ main { padding: 16px 24px 48px; }
 .back-link { color: var(--accent); text-decoration: none; font-size: 13px; }
 .back-link:hover { text-decoration: underline; }
 
+.page-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.help-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 13px;
+}
+.help-link:hover { text-decoration: underline; }
+
 .auth-header {
   display: flex;
   align-items: center;
