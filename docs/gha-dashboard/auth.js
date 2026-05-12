@@ -1,7 +1,7 @@
-// OAuth Device Flow auth for the metanorma & friends Actions dashboard.
-// Register the OAuth App on the @opoudjis personal account with Device Flow
-// enabled, then paste its Client ID below.
-export const CLIENT_ID = "REPLACE_WITH_OAUTH_APP_CLIENT_ID";
+// OAuth Device Flow auth for the Ribose GitHub Actions Dashboard.
+// Client ID is the public OAuth App identifier; safe to commit. The app is
+// registered under @opoudjis with Device Flow enabled.
+export const CLIENT_ID = "Ov23ctdTo73CKizaGSuv";
 
 const TOKEN_KEY = "metanorma-actions-dashboard.token";
 const USER_KEY = "metanorma-actions-dashboard.user";
