@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Active runs</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="dashboard">
+  <header class="page-header">
+    <div class="page-header-row">
+      <div class="page-header-left">
+        <a class="back-link" href="./index.html">&larr; All orgs</a>
+        <h1 id="org-title">Active runs</h1>
+      </div>
+      <div id="auth-header" class="auth-header"></div>
+    </div>
+    <div class="controls">
+      <span id="status" class="status-text"></span>
+      <button type="button" id="refresh-now">Refresh now</button>
+      <label class="control-label">
+        Auto:
+        <select id="auto-refresh">
+          <option value="off" selected>off</option>
+          <option value="15s">15s</option>
+          <option value="30s">30s</option>
+          <option value="60s">60s</option>
+        </select>
+      </label>
+      <button type="button" id="rescan-org">Rescan org</button>
+      <span id="rate-limit" class="rate-limit"></span>
+    </div>
+    <div class="filter-bar">
+      <input type="search" id="filter-text" placeholder="Filter repo / workflow…">
+      <label class="control-label"><input type="checkbox" id="filter-in-progress" checked> in-progress</label>
+      <label class="control-label"><input type="checkbox" id="filter-queued" checked> queued</label>
+      <span id="active-count" class="active-count"></span>
+    </div>
+  </header>
+  <main>
+    <table id="runs">
+      <thead>
+        <tr>
+          <th data-sort="repo">Repo</th>
+          <th data-sort="workflow">Workflow</th>
+          <th>Run</th>
+          <th data-sort="ref">Branch / PR</th>
+          <th data-sort="event">Event</th>
+          <th data-sort="actor">Actor</th>
+          <th data-sort="status">Status</th>
+          <th data-sort="started">Started</th>
+          <th data-sort="elapsed">Elapsed</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div id="empty-state" class="empty-state" style="display: none">
+      <p>All quiet.</p>
+      <p class="empty-count"><span id="empty-count"></span>.</p>
+    </div>
+  </main>
+  <script type="module" src="./dashboard.js"></script>
+</body>
+</html>

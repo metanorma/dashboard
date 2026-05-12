@@ -1,0 +1,9 @@
+{
+  "orgs": [
+    { "name": "metanorma",  "label": "Metanorma" },
+    { "name": "relaton",    "label": "Relaton" },
+    { "name": "lutaml",     "label": "LutaML" },
+    { "name": "plurimath",  "label": "Plurimath" },
+    { "name": "claricle",   "label": "Claricle" }
+  ]
+}

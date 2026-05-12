@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Active GitHub Actions runs</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="entry">
+  <header class="page-header">
+    <div class="page-header-row">
+      <h1>Active GitHub Actions runs</h1>
+      <div id="auth-header" class="auth-header"></div>
+    </div>
+    <p class="page-header-hint">Pick an org to see its in-progress and queued workflow runs.</p>
+  </header>
+  <main>
+    <div id="org-grid" class="org-grid"></div>
+    <details class="manage-orgs-panel">
+      <summary>Manage subscriptions</summary>
+      <div id="manage-orgs"></div>
+    </details>
+  </main>
+  <script type="module" src="./entry.js"></script>
+</body>
+</html>
