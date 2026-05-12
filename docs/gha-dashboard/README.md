@@ -7,7 +7,7 @@ Useful for spotting stuck jobs, coordinating release runs, and getting a quick "
 ## Where to find it
 
 - **Public URL** (after a metanorma org owner enables GitHub Pages on this repo): `https://metanorma.github.io/metanorma-release/gha-dashboard/`
-- **Local** (any clone of this repo): open `docs/gha-dashboard/index.html` in your browser, or run `python3 -m http.server 8000` from the repo root and visit `http://localhost:8000/docs/gha-dashboard/`
+- **Local**, from a clone of this repo: see [Running locally](#running-locally) below.
 
 The Pages URL is the one to share with colleagues — no clone needed.
 
@@ -68,6 +68,59 @@ The per-org page does its work in two distinct steps: first it asks GitHub for t
 **The dashboard is empty / shows "All quiet".** That means there are genuinely no queued or in-progress runs in that org right now. Try triggering a workflow manually (e.g. `gh workflow run` on any repo) and refresh — it should appear.
 
 **Rate-limit warning in the footer.** The authenticated GitHub API budget is 5000 calls per hour per user. A full scan across all five orgs is around 850 calls; you'd need to manually refresh ~5 times per hour to come close. ETag caching on auto-refresh keeps the cost near zero, so this rarely matters in practice.
+
+## Running locally
+
+Useful if the Pages URL isn't published yet (because the metanorma-release Pages source hasn't been enabled, or because you want to test the branch before merge), or if you just want to keep a personal copy that doesn't depend on Ribose infrastructure.
+
+### Prerequisites
+
+- **Git**, any version.
+- **Python 3**, any version that includes the `http.server` module — preinstalled on macOS and on essentially every Linux distribution. Verify with `python3 --version`.
+- A clone of `metanorma/metanorma-release`. If you don't have one yet:
+
+  ```bash
+  git clone https://github.com/metanorma/metanorma-release.git
+  cd metanorma-release
+  ```
+
+### Launching the local web server
+
+From the repo root, in a terminal:
+
+```bash
+python3 -m http.server 8000
+```
+
+That binds a static-file server to port 8000 serving the repo root; you'll see a line like `Serving HTTP on :: port 8000 (http://[::]:8000/) ...`. **Leave the terminal open** — the server runs only as long as that process is alive.
+
+Then open `http://localhost:8000/docs/gha-dashboard/` in your browser. From here, sign-in and usage are identical to the Pages URL.
+
+> **Don't just double-click `index.html` to open it as a `file://` URL.** Browsers block `fetch()` of local files from `file://` origins for security, so `orgs.json` won't load and the dashboard stays blank with no error. Always go through `http://localhost:8000`.
+
+If port 8000 is already in use on your machine (e.g. another dev server), pick anything else:
+
+```bash
+python3 -m http.server 8765
+```
+
+and visit `http://localhost:8765/docs/gha-dashboard/` instead. The port number is just a label; nothing about the dashboard depends on a specific one.
+
+### Stopping the server
+
+In the terminal where it's running, press **`Ctrl-C`**. That sends an interrupt signal, the Python process exits, and the port is freed. You should see the prompt return.
+
+If you backgrounded it (e.g. ran `python3 -m http.server 8000 &` or with `nohup`), find and kill it by port instead:
+
+```bash
+lsof -ti :8000 | xargs kill
+```
+
+Replace `8000` with whatever port you used. `lsof -ti :PORT` prints the PID of whatever owns that port; piping into `kill` terminates it.
+
+### Note on tokens across origins
+
+The PAT in your browser's `localStorage` is scoped per origin. The Pages site (`https://metanorma.github.io`) and your local copy (`http://localhost:8000`) are *different* origins, so a token pasted on one is invisible to the other. You'll be prompted for the token again on first visit to each origin — the same token works in both, just paste it again. Signing out from one origin does not sign you out from the other.
 
 ## Adding a new org
 
