@@ -187,8 +187,8 @@ table#runs {
   margin: 24px 0;
 }
 
-/* Device flow modal */
-#device-flow-modal {
+/* PAT sign-in modal */
+#pat-modal {
   position: fixed;
   inset: 0;
   background: rgba(31, 35, 40, 0.5);
@@ -198,42 +198,58 @@ table#runs {
   z-index: 100;
 }
 
-.device-flow-card {
+.pat-card {
   background: var(--panel);
   border-radius: 8px;
   padding: 32px;
-  max-width: 400px;
-  text-align: center;
+  max-width: 440px;
+  width: calc(100% - 32px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
-.device-flow-card h2 { margin: 0 0 12px; font-size: 20px; }
-.device-flow-card a { color: var(--accent); }
-
-.device-flow-code {
+.pat-card h2 { margin: 0 0 12px; font-size: 20px; }
+.pat-card p { margin: 8px 0; }
+.pat-card a { color: var(--accent); }
+.pat-card code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  padding: 16px;
+  font-size: 12px;
   background: var(--bg);
-  border-radius: 6px;
-  margin: 16px 0;
+  padding: 1px 4px;
+  border-radius: 3px;
 }
 
-.device-flow-card button {
-  display: inline-block;
-  margin: 4px;
-  padding: 8px 16px;
-  border-radius: 6px;
+.pat-input {
+  width: 100%;
+  padding: 8px 12px;
+  margin: 12px 0;
   border: 1px solid var(--border);
-  background: var(--panel);
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+}
+.pat-input:focus { outline: none; border-color: var(--accent); }
+
+.pat-submit {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: white;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 500;
 }
-.device-flow-open {
-  background: var(--accent) !important;
-  color: white;
-  border-color: var(--accent) !important;
+.pat-submit:disabled { opacity: 0.6; cursor: wait; }
+
+.pat-error {
+  color: var(--error);
+  font-size: 13px;
+  margin-top: 12px;
 }
 
-.device-flow-hint { color: var(--muted); font-size: 12px; margin-top: 16px; }
+.pat-hint {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 16px;
+}

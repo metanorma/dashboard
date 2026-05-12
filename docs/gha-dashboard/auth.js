@@ -1,14 +1,13 @@
-// OAuth Device Flow auth for the Ribose GitHub Actions Dashboard.
-// Client ID is the public OAuth App identifier; safe to commit. The app is
-// registered under @opoudjis with Device Flow enabled.
-export const CLIENT_ID = "Ov23ctdTo73CKizaGSuv";
+// Personal Access Token auth for the Ribose GitHub Actions Dashboard.
+// Browser-side OAuth Device Flow was abandoned because GitHub's
+// /login/device/code does not support cross-origin CORS from arbitrary
+// browser origins (verified empirically; see issue #29). api.github.com
+// itself supports CORS, so once the user pastes a PAT the rest works.
 
 const TOKEN_KEY = "metanorma-actions-dashboard.token";
 const USER_KEY = "metanorma-actions-dashboard.user";
-
-const DEVICE_CODE_URL = "https://github.com/login/device/code";
-const ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
-const VERIFICATION_URI = "https://github.com/login/device";
+const TOKEN_NEW_URL =
+  "https://github.com/settings/tokens/new?description=Ribose%20GitHub%20Actions%20Dashboard";
 
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY);
@@ -25,108 +24,73 @@ export function signOut() {
 }
 
 export async function ensureAuthenticated() {
-  let token = getToken();
-  if (token) return token;
-  token = await runDeviceFlow();
-  localStorage.setItem(TOKEN_KEY, token);
-  const user = await fetchUser(token);
-  localStorage.setItem(USER_KEY, JSON.stringify(user));
-  return token;
+  const existing = getToken();
+  if (existing) return existing;
+  return runPatPrompt();
+}
+
+function runPatPrompt() {
+  return new Promise((resolve) => {
+    const overlay = document.createElement("div");
+    overlay.id = "pat-modal";
+    overlay.innerHTML = `
+      <div class="pat-card">
+        <h2>Sign in with a GitHub token</h2>
+        <p>Paste a <strong>personal access token</strong>. The dashboard only needs authentication to lift the GitHub API rate limit &mdash; <em>no scopes are required</em> for public-repo access.</p>
+        <p><a href="${TOKEN_NEW_URL}" target="_blank" rel="noopener">Create a token on GitHub &rarr;</a></p>
+        <input type="password" class="pat-input" placeholder="ghp_&hellip; or github_pat_&hellip;" autocomplete="off" spellcheck="false">
+        <button type="button" class="pat-submit">Sign in</button>
+        <p class="pat-error" hidden></p>
+        <p class="pat-hint">Stored in this browser's <code>localStorage</code>; only sent to <code>api.github.com</code>.</p>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    const input = overlay.querySelector(".pat-input");
+    const submit = overlay.querySelector(".pat-submit");
+    const error = overlay.querySelector(".pat-error");
+    input.focus();
+
+    const trySubmit = async () => {
+      const token = input.value.trim();
+      if (!token) return;
+      submit.disabled = true;
+      submit.textContent = "Verifying…";
+      error.hidden = true;
+      try {
+        const user = await fetchUser(token);
+        localStorage.setItem(TOKEN_KEY, token);
+        localStorage.setItem(USER_KEY, JSON.stringify(user));
+        overlay.remove();
+        resolve(token);
+      } catch (e) {
+        submit.disabled = false;
+        submit.textContent = "Sign in";
+        error.textContent = e.message;
+        error.hidden = false;
+        input.focus();
+        input.select();
+      }
+    };
+    submit.addEventListener("click", trySubmit);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") trySubmit();
+    });
+  });
 }
 
 async function fetchUser(token) {
-  const res = await fetch("https://api.github.com/user", {
-    headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
-  });
+  let res;
+  try {
+    res = await fetch("https://api.github.com/user", {
+      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+    });
+  } catch (_) {
+    throw new Error("Network error reaching api.github.com.");
+  }
+  if (res.status === 401) throw new Error("Token rejected by GitHub (401). Double-check it.");
   if (!res.ok) throw new Error(`GET /user failed: ${res.status}`);
   const body = await res.json();
   return { login: body.login, avatar_url: body.avatar_url };
-}
-
-async function runDeviceFlow() {
-  if (CLIENT_ID === "REPLACE_WITH_OAUTH_APP_CLIENT_ID") {
-    throw new Error(
-      "OAuth Client ID not configured. Edit docs/gha-dashboard/auth.js and set CLIENT_ID.",
-    );
-  }
-  const start = await postForm(DEVICE_CODE_URL, { client_id: CLIENT_ID, scope: "" });
-  const { device_code, user_code, verification_uri, interval, expires_in } = start;
-  const deadline = Date.now() + expires_in * 1000;
-  const dismissed = renderDeviceModal({ user_code, verification_uri: verification_uri || VERIFICATION_URI });
-  let pollInterval = (interval || 5) * 1000;
-  while (Date.now() < deadline) {
-    if (dismissed.cancelled) throw new Error("Sign-in cancelled.");
-    await sleep(pollInterval);
-    const tokenRes = await postForm(ACCESS_TOKEN_URL, {
-      client_id: CLIENT_ID,
-      device_code,
-      grant_type: "urn:ietf:params:oauth:grant-type:device_code",
-    });
-    if (tokenRes.access_token) {
-      dismissModal();
-      return tokenRes.access_token;
-    }
-    if (tokenRes.error === "authorization_pending") continue;
-    if (tokenRes.error === "slow_down") {
-      pollInterval += 5000;
-      continue;
-    }
-    if (tokenRes.error === "expired_token" || tokenRes.error === "access_denied") {
-      dismissModal();
-      throw new Error(`Sign-in failed: ${tokenRes.error}`);
-    }
-    throw new Error(`Unexpected token response: ${JSON.stringify(tokenRes)}`);
-  }
-  dismissModal();
-  throw new Error("Device code expired before sign-in completed.");
-}
-
-async function postForm(url, params) {
-  const body = new URLSearchParams(params).toString();
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { Accept: "application/json", "Content-Type": "application/x-www-form-urlencoded" },
-    body,
-  });
-  if (!res.ok) throw new Error(`POST ${url} failed: ${res.status}`);
-  return res.json();
-}
-
-function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-function renderDeviceModal({ user_code, verification_uri }) {
-  const state = { cancelled: false };
-  const overlay = document.createElement("div");
-  overlay.id = "device-flow-modal";
-  overlay.innerHTML = `
-    <div class="device-flow-card">
-      <h2>Sign in to GitHub</h2>
-      <p>Open <a href="${verification_uri}" target="_blank" rel="noopener">${verification_uri}</a> and enter the code:</p>
-      <div class="device-flow-code">${user_code}</div>
-      <button type="button" class="device-flow-open">Copy code &amp; open GitHub</button>
-      <button type="button" class="device-flow-cancel">Cancel</button>
-      <p class="device-flow-hint">This page will continue automatically once you complete consent.</p>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-  overlay.querySelector(".device-flow-open").addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(user_code);
-    } catch (_) {}
-    window.open(verification_uri, "_blank", "noopener");
-  });
-  overlay.querySelector(".device-flow-cancel").addEventListener("click", () => {
-    state.cancelled = true;
-    dismissModal();
-  });
-  return state;
-}
-
-function dismissModal() {
-  const overlay = document.getElementById("device-flow-modal");
-  if (overlay) overlay.remove();
 }
 
 export function renderAuthHeader(container, { onSignOut } = {}) {
