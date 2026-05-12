@@ -72,6 +72,7 @@ function renderManagePanel() {
         <code class="manage-slug">${escapeHtml(org.name)}</code>
       </label>
     `).join("")}
+    <p class="manage-request">Want more orgs covered? <a href="https://github.com/metanorma/metanorma-release/issues" target="_blank" rel="noopener">Lodge a request</a> in the <code>metanorma-release</code> repo.</p>
   `;
   container.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
     cb.addEventListener("change", () => {

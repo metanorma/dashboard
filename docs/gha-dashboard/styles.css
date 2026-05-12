@@ -46,14 +46,17 @@ main { padding: 16px 24px 48px; }
 
 .page-header-right {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
 }
 
 .help-link {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--accent);
   text-decoration: none;
-  font-size: 13px;
 }
 .help-link:hover { text-decoration: underline; }
 
@@ -172,6 +175,22 @@ main { padding: 16px 24px 48px; }
   font-size: 12px;
   color: var(--muted);
   margin: 8px 0 12px;
+}
+
+.manage-request {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 12px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.manage-request a { color: var(--accent); }
+.manage-request code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  background: var(--bg);
+  padding: 1px 4px;
+  border-radius: 3px;
 }
 
 .manage-row {
