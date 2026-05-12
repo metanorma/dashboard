@@ -18,7 +18,7 @@ WARNING: This repository is for INTERNAL USE ONLY.
 
 https://github.com/metanorma/metanorma-utils[metanorma-utils] image:https://img.shields.io/gem/v/metanorma-utils.svg["Gem Version",link="https://rubygems.org/gems/metanorma-utils"]::
 image:https://github.com/metanorma/metanorma-utils/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-utils/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-utils/actions/workflows/rake.yml/badge.svg?branch=v2.0.5["Latest release",link="https://github.com/metanorma/metanorma-utils/actions/workflows/rake.yml?query=branch%3Av2.0.5"]
+image:https://github.com/metanorma/metanorma-utils/actions/workflows/rake.yml/badge.svg?branch=v2.0.6["Latest release",link="https://github.com/metanorma/metanorma-utils/actions/workflows/rake.yml?query=branch%3Av2.0.6"]
 image:https://github.com/metanorma/metanorma-utils/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-utils/actions/workflows/release.yml"]
 
 
@@ -28,7 +28,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-utils/late
 
 https://github.com/metanorma/isodoc-i18n[isodoc-i18n] image:https://img.shields.io/gem/v/isodoc-i18n.svg["Gem Version",link="https://rubygems.org/gems/isodoc-i18n"]::
 image:https://github.com/metanorma/isodoc-i18n/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/isodoc-i18n/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/isodoc-i18n/actions/workflows/rake.yml/badge.svg?branch=v1.4.3["Latest release",link="https://github.com/metanorma/isodoc-i18n/actions/workflows/rake.yml?query=branch%3Av1.4.3"]
+image:https://github.com/metanorma/isodoc-i18n/actions/workflows/rake.yml/badge.svg?branch=v1.5.2["Latest release",link="https://github.com/metanorma/isodoc-i18n/actions/workflows/rake.yml?query=branch%3Av1.5.2"]
 image:https://github.com/metanorma/isodoc-i18n/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/isodoc-i18n/actions/workflows/release.yml"]
 
 
@@ -40,7 +40,7 @@ image:https://img.shields.io/github/commits-since/metanorma/isodoc-i18n/latest.s
 
 https://github.com/relaton/relaton-render[relaton-render] image:https://img.shields.io/gem/v/relaton-render.svg["Gem Version",link="https://rubygems.org/gems/relaton-render"]::
 image:https://github.com/relaton/relaton-render/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/relaton/relaton-render/actions/workflows/rake.yml"]
-image:https://github.com/relaton/relaton-render/actions/workflows/rake.yml/badge.svg?branch=v1.1.0["Latest release",link="https://github.com/relaton/relaton-render/actions/workflows/rake.yml?query=branch%3Av1.1.0"]
+image:https://github.com/relaton/relaton-render/actions/workflows/rake.yml/badge.svg?branch=v1.2.0["Latest release",link="https://github.com/relaton/relaton-render/actions/workflows/rake.yml?query=branch%3Av1.2.0"]
 image:https://github.com/relaton/relaton-render/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/relaton/relaton-render/actions/workflows/release.yml"]
 
 image:https://img.shields.io/github/issues-pr-raw/relaton/relaton-render.svg["Pull Requests",link="https://github.com/relaton/relaton-render/pulls"]
@@ -50,7 +50,7 @@ image:https://img.shields.io/github/commits-since/relaton/relaton-render/latest.
 
 https://github.com/metanorma/metanorma-taste[metanorma-taste] image:https://img.shields.io/gem/v/metanorma-taste.svg["Gem Version",link="https://rubygems.org/gems/metanorma-taste"]::
 image:https://github.com/metanorma/metanorma-taste/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-taste/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-taste/actions/workflows/rake.yml/badge.svg?branch=v1.0.3["Latest release",link="https://github.com/metanorma/metanorma-taste/actions/workflows/rake.yml?query=branch%3Av1.0.3"]
+image:https://github.com/metanorma/metanorma-taste/actions/workflows/rake.yml/badge.svg?branch=v1.0.4["Latest release",link="https://github.com/metanorma/metanorma-taste/actions/workflows/rake.yml?query=branch%3Av1.0.4"]
 image:https://github.com/metanorma/metanorma-taste/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-taste/actions/workflows/release.yml"]
 
 
@@ -60,7 +60,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-taste/late
 
 https://github.com/metanorma/html2doc[html2doc] image:https://img.shields.io/gem/v/html2doc.svg["Gem Version",link="https://rubygems.org/gems/html2doc"]::
 image:https://github.com/metanorma/html2doc/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/html2doc/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/html2doc/actions/workflows/rake.yml/badge.svg?branch=v1.10.7["Latest release",link="https://github.com/metanorma/html2doc/actions/workflows/rake.yml?query=branch%3Av1.10.7"]
+image:https://github.com/metanorma/html2doc/actions/workflows/rake.yml/badge.svg?branch=v1.11.0["Latest release",link="https://github.com/metanorma/html2doc/actions/workflows/rake.yml?query=branch%3Av1.11.0"]
 image:https://github.com/metanorma/html2doc/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/html2doc/actions/workflows/release.yml"]
 
 
@@ -70,7 +70,7 @@ image:https://img.shields.io/github/commits-since/metanorma/html2doc/latest.svg[
 
 https://github.com/metanorma/isodoc[isodoc] image:https://img.shields.io/gem/v/isodoc.svg["Gem Version",link="https://rubygems.org/gems/isodoc"]::
 image:https://github.com/metanorma/isodoc/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/isodoc/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/isodoc/actions/workflows/rake.yml/badge.svg?branch=v3.5.0["Latest release",link="https://github.com/metanorma/isodoc/actions/workflows/rake.yml?query=branch%3Av3.5.0"]
+image:https://github.com/metanorma/isodoc/actions/workflows/rake.yml/badge.svg?branch=v3.6.1["Latest release",link="https://github.com/metanorma/isodoc/actions/workflows/rake.yml?query=branch%3Av3.6.1"]
 image:https://github.com/metanorma/isodoc/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/isodoc/actions/workflows/release.yml"]
 
 
@@ -80,7 +80,7 @@ image:https://img.shields.io/github/commits-since/metanorma/isodoc/latest.svg["C
 
 https://github.com/metanorma/metanorma-core[metanorma-core] image:https://img.shields.io/gem/v/metanorma-core.svg["Gem Version",link="https://rubygems.org/gems/metanorma-core"]::
 image:https://github.com/metanorma/metanorma-core/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-core/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-core/actions/workflows/rake.yml/badge.svg?branch=v0.1.0["Latest release",link="https://github.com/metanorma/metanorma-core/actions/workflows/rake.yml?query=branch%3Av0.1.0"]
+image:https://github.com/metanorma/metanorma-core/actions/workflows/rake.yml/badge.svg?branch=v0.2.0["Latest release",link="https://github.com/metanorma/metanorma-core/actions/workflows/rake.yml?query=branch%3Av0.2.0"]
 image:https://github.com/metanorma/metanorma-core/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-core/actions/workflows/release.yml"]
 
 
@@ -90,7 +90,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-core/lates
 
 https://github.com/metanorma/metanorma-standoc[metanorma-standoc] image:https://img.shields.io/gem/v/metanorma-standoc.svg["Gem Version",link="https://rubygems.org/gems/metanorma-standoc"]::
 image:https://github.com/metanorma/metanorma-standoc/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-standoc/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-standoc/actions/workflows/rake.yml/badge.svg?branch=v3.4.0["Latest release",link="https://github.com/metanorma/metanorma-standoc/actions/workflows/rake.yml?query=branch%3Av3.4.0"]
+image:https://github.com/metanorma/metanorma-standoc/actions/workflows/rake.yml/badge.svg?branch=v3.4.1["Latest release",link="https://github.com/metanorma/metanorma-standoc/actions/workflows/rake.yml?query=branch%3Av3.4.1"]
 image:https://github.com/metanorma/metanorma-standoc/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-standoc/actions/workflows/release.yml"]
 
 
@@ -100,7 +100,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-standoc/la
 
 https://github.com/metanorma/mn-requirements[mn-requirements] image:https://img.shields.io/gem/v/mn-requirements.svg["Gem Version",link="https://rubygems.org/gems/mn-requirements"]::
 image:https://github.com/metanorma/mn-requirements/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/mn-requirements/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/mn-requirements/actions/workflows/rake.yml/badge.svg?branch=v0.5.8["Latest release",link="https://github.com/metanorma/mn-requirements/actions/workflows/rake.yml?query=branch%3Av0.5.8"]
+image:https://github.com/metanorma/mn-requirements/actions/workflows/rake.yml/badge.svg?branch=v0.5.10["Latest release",link="https://github.com/metanorma/mn-requirements/actions/workflows/rake.yml?query=branch%3Av0.5.10"]
 image:https://github.com/metanorma/mn-requirements/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/mn-requirements/actions/workflows/release.yml"]
 
 
@@ -110,7 +110,7 @@ image:https://img.shields.io/github/commits-since/metanorma/mn-requirements/late
 
 https://github.com/metanorma/metanorma[metanorma] image:https://img.shields.io/gem/v/metanorma.svg["Gem Version",link="https://rubygems.org/gems/metanorma"]::
 image:https://github.com/metanorma/metanorma/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma/actions/workflows/rake.yml/badge.svg?branch=v2.3.7["Latest release",link="https://github.com/metanorma/metanorma/actions/workflows/rake.yml?query=branch%3Av2.3.7"]
+image:https://github.com/metanorma/metanorma/actions/workflows/rake.yml/badge.svg?branch=v2.3.8["Latest release",link="https://github.com/metanorma/metanorma/actions/workflows/rake.yml?query=branch%3Av2.3.8"]
 image:https://github.com/metanorma/metanorma/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma/actions/workflows/release.yml"]
 
 
@@ -120,7 +120,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma/latest.svg
 
 https://github.com/metanorma/metanorma-iso[metanorma-iso] image:https://img.shields.io/gem/v/metanorma-iso.svg["Gem Version",link="https://rubygems.org/gems/metanorma-iso"]::
 image:https://github.com/metanorma/metanorma-iso/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-iso/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-iso/actions/workflows/rake.yml/badge.svg?branch=v3.4.0["Latest release",link="https://github.com/metanorma/metanorma-iso/actions/workflows/rake.yml?query=branch%3Av3.4.0"]
+image:https://github.com/metanorma/metanorma-iso/actions/workflows/rake.yml/badge.svg?branch=v3.4.1["Latest release",link="https://github.com/metanorma/metanorma-iso/actions/workflows/rake.yml?query=branch%3Av3.4.1"]
 image:https://github.com/metanorma/metanorma-iso/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-iso/actions/workflows/release.yml"]
 
 
@@ -130,7 +130,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-iso/latest
 
 https://github.com/metanorma/metanorma-generic[metanorma-generic] image:https://img.shields.io/gem/v/metanorma-generic.svg["Gem Version",link="https://rubygems.org/gems/metanorma-generic"]::
 image:https://github.com/metanorma/metanorma-generic/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-generic/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-generic/actions/workflows/rake.yml/badge.svg?branch=v3.3.3["Latest release",link="https://github.com/metanorma/metanorma-generic/actions/workflows/rake.yml?query=branch%3Av3.3.3"]
+image:https://github.com/metanorma/metanorma-generic/actions/workflows/rake.yml/badge.svg?branch=v3.3.4["Latest release",link="https://github.com/metanorma/metanorma-generic/actions/workflows/rake.yml?query=branch%3Av3.3.4"]
 image:https://github.com/metanorma/metanorma-generic/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-generic/actions/workflows/release.yml"]
 
 
@@ -140,7 +140,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-generic/la
 
 https://github.com/metanorma/metanorma-ietf[metanorma-ietf] image:https://img.shields.io/gem/v/metanorma-ietf.svg["Gem Version",link="https://rubygems.org/gems/metanorma-ietf"]::
 image:https://github.com/metanorma/metanorma-ietf/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-ietf/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-ietf/actions/workflows/rake.yml/badge.svg?branch=v3.7.4["Latest release",link="https://github.com/metanorma/metanorma-ietf/actions/workflows/rake.yml?query=branch%3Av3.7.4"]
+image:https://github.com/metanorma/metanorma-ietf/actions/workflows/rake.yml/badge.svg?branch=v3.7.5["Latest release",link="https://github.com/metanorma/metanorma-ietf/actions/workflows/rake.yml?query=branch%3Av3.7.5"]
 image:https://github.com/metanorma/metanorma-ietf/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-ietf/actions/workflows/release.yml"]
 
 
@@ -150,7 +150,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-ietf/lates
 
 https://github.com/metanorma/metanorma-ieee[metanorma-ieee] image:https://img.shields.io/gem/v/metanorma-ieee.svg["Gem Version",link="https://rubygems.org/gems/metanorma-ieee"]::
 image:https://github.com/metanorma/metanorma-ieee/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-ieee/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-ieee/actions/workflows/rake.yml/badge.svg?branch=v1.6.8["Latest release",link="https://github.com/metanorma/metanorma-ieee/actions/workflows/rake.yml?query=branch%3Av1.6.8"]
+image:https://github.com/metanorma/metanorma-ieee/actions/workflows/rake.yml/badge.svg?branch=v1.6.9["Latest release",link="https://github.com/metanorma/metanorma-ieee/actions/workflows/rake.yml?query=branch%3Av1.6.9"]
 image:https://github.com/metanorma/metanorma-ieee/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-ieee/actions/workflows/release.yml"]
 
 
@@ -160,7 +160,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-ieee/lates
 
 https://github.com/metanorma/metanorma-itu[metanorma-itu] image:https://img.shields.io/gem/v/metanorma-itu.svg["Gem Version",link="https://rubygems.org/gems/metanorma-itu"]::
 image:https://github.com/metanorma/metanorma-itu/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-itu/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-itu/actions/workflows/rake.yml/badge.svg?branch=v2.8.7["Latest release",link="https://github.com/metanorma/metanorma-itu/actions/workflows/rake.yml?query=branch%3Av2.8.7"]
+image:https://github.com/metanorma/metanorma-itu/actions/workflows/rake.yml/badge.svg?branch=v2.8.8["Latest release",link="https://github.com/metanorma/metanorma-itu/actions/workflows/rake.yml?query=branch%3Av2.8.8"]
 image:https://github.com/metanorma/metanorma-itu/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-itu/actions/workflows/release.yml"]
 
 
@@ -176,7 +176,7 @@ image:https://github.com/metanorma/metanorma-nist/actions/workflows/release.yml/
 
 https://github.com/metanorma/metanorma-ogc[metanorma-ogc] image:https://img.shields.io/gem/v/metanorma-ogc.svg["Gem Version",link="https://rubygems.org/gems/metanorma-ogc"]::
 image:https://github.com/metanorma/metanorma-ogc/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-ogc/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-ogc/actions/workflows/rake.yml/badge.svg?branch=v2.9.4["Latest release",link="https://github.com/metanorma/metanorma-ogc/actions/workflows/rake.yml?query=branch%3Av2.9.4"]
+image:https://github.com/metanorma/metanorma-ogc/actions/workflows/rake.yml/badge.svg?branch=v2.9.5["Latest release",link="https://github.com/metanorma/metanorma-ogc/actions/workflows/rake.yml?query=branch%3Av2.9.5"]
 image:https://github.com/metanorma/metanorma-ogc/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-ogc/actions/workflows/release.yml"]
 
 
@@ -186,7 +186,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-ogc/latest
 
 https://github.com/metanorma/metanorma-cc[metanorma-cc] image:https://img.shields.io/gem/v/metanorma-cc.svg["Gem Version",link="https://rubygems.org/gems/metanorma-cc"]::
 image:https://github.com/metanorma/metanorma-cc/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-cc/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-cc/actions/workflows/rake.yml/badge.svg?branch=v2.8.4["Latest release",link="https://github.com/metanorma/metanorma-cc/actions/workflows/rake.yml?query=branch%3Av2.8.4"]
+image:https://github.com/metanorma/metanorma-cc/actions/workflows/rake.yml/badge.svg?branch=v2.8.5["Latest release",link="https://github.com/metanorma/metanorma-cc/actions/workflows/rake.yml?query=branch%3Av2.8.5"]
 image:https://github.com/metanorma/metanorma-cc/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-cc/actions/workflows/release.yml"]
 
 
@@ -196,7 +196,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-cc/latest.
 
 https://github.com/metanorma/metanorma-iho[metanorma-iho] image:https://img.shields.io/gem/v/metanorma-iho.svg["Gem Version",link="https://rubygems.org/gems/metanorma-iho"]::
 image:https://github.com/metanorma/metanorma-iho/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-iho/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-iho/actions/workflows/rake.yml/badge.svg?branch=v1.3.4["Latest release",link="https://github.com/metanorma/metanorma-iho/actions/workflows/rake.yml?query=branch%3Av1.3.4"]
+image:https://github.com/metanorma/metanorma-iho/actions/workflows/rake.yml/badge.svg?branch=v1.3.5["Latest release",link="https://github.com/metanorma/metanorma-iho/actions/workflows/rake.yml?query=branch%3Av1.3.5"]
 image:https://github.com/metanorma/metanorma-iho/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-iho/actions/workflows/release.yml"]
 
 
@@ -206,7 +206,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-iho/latest
 
 https://github.com/metanorma/metanorma-ribose[metanorma-ribose] image:https://img.shields.io/gem/v/metanorma-ribose.svg["Gem Version",link="https://rubygems.org/gems/metanorma-ribose"]::
 image:https://github.com/metanorma/metanorma-ribose/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-ribose/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-ribose/actions/workflows/rake.yml/badge.svg?branch=v2.8.4["Latest release",link="https://github.com/metanorma/metanorma-ribose/actions/workflows/rake.yml?query=branch%3Av2.8.4"]
+image:https://github.com/metanorma/metanorma-ribose/actions/workflows/rake.yml/badge.svg?branch=v2.8.5["Latest release",link="https://github.com/metanorma/metanorma-ribose/actions/workflows/rake.yml?query=branch%3Av2.8.5"]
 image:https://github.com/metanorma/metanorma-ribose/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-ribose/actions/workflows/release.yml"]
 
 
@@ -226,7 +226,7 @@ image:https://img.shields.io/github/commits-since/metanorma/suma/latest.svg["Com
 
 https://github.com/metanorma/metanorma-jis[metanorma-jis] image:https://img.shields.io/gem/v/metanorma-jis.svg["Gem Version",link="https://rubygems.org/gems/metanorma-jis"]::
 image:https://github.com/metanorma/metanorma-jis/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-jis/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-jis/actions/workflows/rake.yml/badge.svg?branch=v1.0.7["Latest release",link="https://github.com/metanorma/metanorma-jis/actions/workflows/rake.yml?query=branch%3Av1.0.7"]
+image:https://github.com/metanorma/metanorma-jis/actions/workflows/rake.yml/badge.svg?branch=v1.0.8["Latest release",link="https://github.com/metanorma/metanorma-jis/actions/workflows/rake.yml?query=branch%3Av1.0.8"]
 image:https://github.com/metanorma/metanorma-jis/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-jis/actions/workflows/release.yml"]
 
 
@@ -236,7 +236,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-jis/latest
 
 https://github.com/metanorma/metanorma-iec[metanorma-iec] image:https://img.shields.io/gem/v/metanorma-iec.svg["Gem Version",link="https://rubygems.org/gems/metanorma-iec"]::
 image:https://github.com/metanorma/metanorma-iec/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-iec/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-iec/actions/workflows/rake.yml/badge.svg?branch=v2.8.4["Latest release",link="https://github.com/metanorma/metanorma-iec/actions/workflows/rake.yml?query=branch%3Av2.8.4"]
+image:https://github.com/metanorma/metanorma-iec/actions/workflows/rake.yml/badge.svg?branch=v2.8.5["Latest release",link="https://github.com/metanorma/metanorma-iec/actions/workflows/rake.yml?query=branch%3Av2.8.5"]
 image:https://github.com/metanorma/metanorma-iec/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-iec/actions/workflows/release.yml"]
 
 
@@ -252,7 +252,7 @@ image:https://github.com/metanorma/metanorma-bsi/actions/workflows/release.yml/b
 
 https://github.com/metanorma/metanorma-bipm[metanorma-bipm] image:https://img.shields.io/gem/v/metanorma-bipm.svg["Gem Version",link="https://rubygems.org/gems/metanorma-bipm"]::
 image:https://github.com/metanorma/metanorma-bipm/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-bipm/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-bipm/actions/workflows/rake.yml/badge.svg?branch=v2.8.4["Latest release",link="https://github.com/metanorma/metanorma-bipm/actions/workflows/rake.yml?query=branch%3Av2.8.4"]
+image:https://github.com/metanorma/metanorma-bipm/actions/workflows/rake.yml/badge.svg?branch=v2.8.5["Latest release",link="https://github.com/metanorma/metanorma-bipm/actions/workflows/rake.yml?query=branch%3Av2.8.5"]
 image:https://github.com/metanorma/metanorma-bipm/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-bipm/actions/workflows/release.yml"]
 
 
@@ -262,7 +262,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-bipm/lates
 
 https://github.com/metanorma/metanorma-plateau[metanorma-plateau] image:https://img.shields.io/gem/v/metanorma-plateau.svg["Gem Version",link="https://rubygems.org/gems/metanorma-plateau"]::
 image:https://github.com/metanorma/metanorma-plateau/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-plateau/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-plateau/actions/workflows/rake.yml/badge.svg?branch=v1.2.8["Latest release",link="https://github.com/metanorma/metanorma-plateau/actions/workflows/rake.yml?query=branch%3Av1.2.8"]
+image:https://github.com/metanorma/metanorma-plateau/actions/workflows/rake.yml/badge.svg?branch=v1.2.9["Latest release",link="https://github.com/metanorma/metanorma-plateau/actions/workflows/rake.yml?query=branch%3Av1.2.9"]
 image:https://github.com/metanorma/metanorma-plateau/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-plateau/actions/workflows/release.yml"]
 
 
@@ -272,7 +272,7 @@ image:https://img.shields.io/github/commits-since/metanorma/metanorma-plateau/la
 
 https://github.com/metanorma/metanorma-cli[metanorma-cli] image:https://img.shields.io/gem/v/metanorma-cli.svg["Gem Version",link="https://rubygems.org/gems/metanorma-cli"]::
 image:https://github.com/metanorma/metanorma-cli/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/metanorma/metanorma-cli/actions/workflows/rake.yml"]
-image:https://github.com/metanorma/metanorma-cli/actions/workflows/rake.yml/badge.svg?branch=v1.15.6["Latest release",link="https://github.com/metanorma/metanorma-cli/actions/workflows/rake.yml?query=branch%3Av1.15.6"]
+image:https://github.com/metanorma/metanorma-cli/actions/workflows/rake.yml/badge.svg?branch=v1.15.7["Latest release",link="https://github.com/metanorma/metanorma-cli/actions/workflows/rake.yml?query=branch%3Av1.15.7"]
 image:https://github.com/metanorma/metanorma-cli/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/metanorma-cli/actions/workflows/release.yml"]
 
 
@@ -604,14 +604,14 @@ image:https://img.shields.io/github/commits-since/metanorma/mn2pdf-ruby/latest.s
 
 https://github.com/metanorma/mn2pdf[mn2pdf] image:https://img.shields.io/gem/v/mn2pdf.svg["Gem Version",link="https://rubygems.org/gems/mn2pdf"]::
 image:https://github.com/metanorma/mn2pdf/actions/workflows/test.yml/badge.svg["Build Status (Test)",link="https://github.com/metanorma/mn2pdf/actions/workflows/test.yml"]
-image:https://github.com/metanorma/mn2pdf/actions/workflows/test.yml/badge.svg?branch=v2.54["Latest release",link="https://github.com/metanorma/mn2pdf/actions/workflows/test.yml?query=branch%3Av2.54"]
+image:https://github.com/metanorma/mn2pdf/actions/workflows/test.yml/badge.svg?branch=v2.55["Latest release",link="https://github.com/metanorma/mn2pdf/actions/workflows/test.yml?query=branch%3Av2.55"]
 image:https://github.com/metanorma/mn2pdf/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/mn2pdf/actions/workflows/release.yml"]
 image:https://img.shields.io/github/issues-pr-raw/metanorma/mn2pdf.svg["Pull Requests",link="https://github.com/metanorma/mn2pdf/pulls"]
 image:https://img.shields.io/github/commits-since/metanorma/mn2pdf/latest.svg["Commits since latest",link="https://github.com/metanorma/mn2pdf/releases"]
 
 https://github.com/metanorma/mnconvert[mnconvert] image:https://img.shields.io/gem/v/mnconvert.svg["Gem Version",link="https://rubygems.org/gems/mnconvert"]::
 image:https://github.com/metanorma/mnconvert/actions/workflows/test.yml/badge.svg["Build Status (Test)",link="https://github.com/metanorma/mnconvert/actions/workflows/test.yml"]
-image:https://github.com/metanorma/mnconvert/actions/workflows/test.yml/badge.svg?branch=v1.82.0["Latest release",link="https://github.com/metanorma/mnconvert/actions/workflows/test.yml?query=branch%3Av1.82.0"]
+image:https://github.com/metanorma/mnconvert/actions/workflows/test.yml/badge.svg?branch=v1.84.0["Latest release",link="https://github.com/metanorma/mnconvert/actions/workflows/test.yml?query=branch%3Av1.84.0"]
 image:https://github.com/metanorma/mnconvert/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/metanorma/mnconvert/actions/workflows/release.yml"]
 image:https://img.shields.io/github/issues-pr-raw/metanorma/mnconvert.svg["Pull Requests",link="https://github.com/metanorma/mnconvert/pulls"]
 image:https://img.shields.io/github/commits-since/metanorma/mnconvert/latest.svg["Commits since latest",link="https://github.com/metanorma/mnconvert/releases"]
@@ -703,7 +703,7 @@ image:https://img.shields.io/github/commits-since/relaton/relaton-omg/latest.svg
 
 https://github.com/relaton/relaton-un[relaton-un] image:https://img.shields.io/gem/v/relaton-un.svg["Gem Version",link="https://rubygems.org/gems/relaton-un"]::
 image:https://github.com/relaton/relaton-un/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/relaton/relaton-un/actions/workflows/rake.yml"]
-image:https://github.com/relaton/relaton-un/actions/workflows/rake.yml/badge.svg?branch=v1.20.0["Latest release",link="https://github.com/relaton/relaton-un/actions/workflows/rake.yml?query=branch%3Av1.20.0"]
+image:https://github.com/relaton/relaton-un/actions/workflows/rake.yml/badge.svg?branch=["Latest release",link="https://github.com/relaton/relaton-un/actions/workflows/rake.yml?query=branch%3A"]
 image:https://github.com/relaton/relaton-un/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/relaton/relaton-un/actions/workflows/release.yml"]
 
 image:https://img.shields.io/github/issues-pr-raw/relaton/relaton-un.svg["Pull Requests",link="https://github.com/relaton/relaton-un/pulls"]
