@@ -89,7 +89,7 @@ async function initialLoad() {
 async function fetchOrgRepos(org) {
   const token = getToken();
   const repos = [];
-  let url = `https://api.github.com/orgs/${org}/repos?per_page=100&type=public`;
+  let url = `https://api.github.com/orgs/${org}/repos?per_page=100&type=all`;
   while (url) {
     const res = await fetch(url, {
       headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },

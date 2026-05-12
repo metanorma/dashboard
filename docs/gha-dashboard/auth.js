@@ -7,7 +7,7 @@
 const TOKEN_KEY = "metanorma-actions-dashboard.token";
 const USER_KEY = "metanorma-actions-dashboard.user";
 const TOKEN_NEW_URL =
-  "https://github.com/settings/tokens/new?description=Ribose%20GitHub%20Actions%20Dashboard";
+  "https://github.com/settings/tokens/new?description=Ribose%20GitHub%20Actions%20Dashboard&scopes=repo";
 
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY);
@@ -36,8 +36,8 @@ function runPatPrompt() {
     overlay.innerHTML = `
       <div class="pat-card">
         <h2>Sign in with a GitHub token</h2>
-        <p>Paste a <strong>personal access token</strong>. The dashboard only needs authentication to lift the GitHub API rate limit &mdash; <em>no scopes are required</em> for public-repo access.</p>
-        <p><a href="${TOKEN_NEW_URL}" target="_blank" rel="noopener">Create a token on GitHub &rarr;</a></p>
+        <p>Paste a <strong>personal access token</strong> with the <code>repo</code> scope. The dashboard uses it to list workflow runs across every repo you have access to &mdash; public and private &mdash; in the configured orgs.</p>
+        <p><a href="${TOKEN_NEW_URL}" target="_blank" rel="noopener">Create a token on GitHub &rarr;</a> (the link pre-selects the <code>repo</code> scope).</p>
         <input type="password" class="pat-input" placeholder="ghp_&hellip; or github_pat_&hellip;" autocomplete="off" spellcheck="false">
         <button type="button" class="pat-submit">Sign in</button>
         <p class="pat-error" hidden></p>
