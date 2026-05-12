@@ -703,7 +703,7 @@ image:https://img.shields.io/github/commits-since/relaton/relaton-omg/latest.svg
 
 https://github.com/relaton/relaton-un[relaton-un] image:https://img.shields.io/gem/v/relaton-un.svg["Gem Version",link="https://rubygems.org/gems/relaton-un"]::
 image:https://github.com/relaton/relaton-un/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/relaton/relaton-un/actions/workflows/rake.yml"]
-image:https://github.com/relaton/relaton-un/actions/workflows/rake.yml/badge.svg?branch=["Latest release",link="https://github.com/relaton/relaton-un/actions/workflows/rake.yml?query=branch%3A"]
+image:https://github.com/relaton/relaton-un/actions/workflows/rake.yml/badge.svg?branch=v1.20.0["Latest release",link="https://github.com/relaton/relaton-un/actions/workflows/rake.yml?query=branch%3Av1.20.0"]
 image:https://github.com/relaton/relaton-un/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/relaton/relaton-un/actions/workflows/release.yml"]
 
 image:https://img.shields.io/github/issues-pr-raw/relaton/relaton-un.svg["Pull Requests",link="https://github.com/relaton/relaton-un/pulls"]
@@ -711,7 +711,7 @@ image:https://img.shields.io/github/commits-since/relaton/relaton-un/latest.svg[
 
 https://github.com/relaton/relaton-w3c[relaton-w3c] image:https://img.shields.io/gem/v/relaton-w3c.svg["Gem Version",link="https://rubygems.org/gems/relaton-w3c"]::
 image:https://github.com/relaton/relaton-w3c/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/relaton/relaton-w3c/actions/workflows/rake.yml"]
-image:https://github.com/relaton/relaton-w3c/actions/workflows/rake.yml/badge.svg?branch=["Latest release",link="https://github.com/relaton/relaton-w3c/actions/workflows/rake.yml?query=branch%3A"]
+image:https://github.com/relaton/relaton-w3c/actions/workflows/rake.yml/badge.svg?branch=v1.20.1["Latest release",link="https://github.com/relaton/relaton-w3c/actions/workflows/rake.yml?query=branch%3Av1.20.1"]
 image:https://github.com/relaton/relaton-w3c/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/relaton/relaton-w3c/actions/workflows/release.yml"]
 
 image:https://img.shields.io/github/issues-pr-raw/relaton/relaton-w3c.svg["Pull Requests",link="https://github.com/relaton/relaton-w3c/pulls"]
@@ -719,7 +719,7 @@ image:https://img.shields.io/github/commits-since/relaton/relaton-w3c/latest.svg
 
 https://github.com/relaton/relaton-itu[relaton-itu] image:https://img.shields.io/gem/v/relaton-itu.svg["Gem Version",link="https://rubygems.org/gems/relaton-itu"]::
 image:https://github.com/relaton/relaton-itu/actions/workflows/rake.yml/badge.svg["Build Status (Rake)",link="https://github.com/relaton/relaton-itu/actions/workflows/rake.yml"]
-image:https://github.com/relaton/relaton-itu/actions/workflows/rake.yml/badge.svg?branch=["Latest release",link="https://github.com/relaton/relaton-itu/actions/workflows/rake.yml?query=branch%3A"]
+image:https://github.com/relaton/relaton-itu/actions/workflows/rake.yml/badge.svg?branch=v1.20.4["Latest release",link="https://github.com/relaton/relaton-itu/actions/workflows/rake.yml?query=branch%3Av1.20.4"]
 image:https://github.com/relaton/relaton-itu/actions/workflows/release.yml/badge.svg["Build Status (Release)",link="https://github.com/relaton/relaton-itu/actions/workflows/release.yml"]
 
 image:https://img.shields.io/github/issues-pr-raw/relaton/relaton-itu.svg["Pull Requests",link="https://github.com/relaton/relaton-itu/pulls"]
