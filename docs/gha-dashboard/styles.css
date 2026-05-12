@@ -127,6 +127,58 @@ main { padding: 16px 24px 48px; }
 .org-label { font-weight: 600; font-size: 16px; }
 .org-name { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--muted); }
 
+/* Subscription management */
+.empty-subs {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+.manage-orgs-panel {
+  margin-top: 32px;
+  max-width: 500px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.manage-orgs-panel summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--muted);
+  user-select: none;
+}
+.manage-orgs-panel summary:hover { color: var(--text); }
+.manage-orgs-panel[open] summary { color: var(--text); margin-bottom: 8px; }
+
+.manage-hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 8px 0 12px;
+}
+
+.manage-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+.manage-row:hover .manage-label { color: var(--accent); }
+.manage-label { flex: 0 0 auto; font-size: 14px; }
+.manage-slug {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
 /* Dashboard table */
 table#runs {
   width: 100%;

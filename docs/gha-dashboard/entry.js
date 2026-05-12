@@ -1,13 +1,17 @@
 import { ensureAuthenticated, getToken, renderAuthHeader } from "./auth.js";
 
 const ORG_AVATAR_CACHE = "metanorma-actions-dashboard.orgAvatars";
+const UNSUB_KEY = "metanorma-actions-dashboard.unsubscribedOrgs";
+
+let ALL_ORGS = [];
 
 async function main() {
   await ensureAuthenticated();
   renderAuthHeader(document.getElementById("auth-header"));
-  const orgs = await loadOrgs();
-  renderTiles(orgs);
-  hydrateAvatars(orgs);
+  ALL_ORGS = await loadOrgs();
+  renderTiles();
+  renderManagePanel();
+  hydrateAvatars(ALL_ORGS);
 }
 
 async function loadOrgs() {
@@ -17,10 +21,28 @@ async function loadOrgs() {
   return body.orgs;
 }
 
-function renderTiles(orgs) {
+function readUnsubscribed() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(UNSUB_KEY) || "[]"));
+  } catch (_) {
+    return new Set();
+  }
+}
+
+function writeUnsubscribed(set) {
+  localStorage.setItem(UNSUB_KEY, JSON.stringify([...set]));
+}
+
+function renderTiles() {
   const grid = document.getElementById("org-grid");
   const cached = readAvatarCache();
-  grid.innerHTML = orgs
+  const unsub = readUnsubscribed();
+  const visible = ALL_ORGS.filter((o) => !unsub.has(o.name));
+  if (visible.length === 0) {
+    grid.innerHTML = `<div class="empty-subs">You've unsubscribed from every org. Use the panel below to subscribe to one or more.</div>`;
+    return;
+  }
+  grid.innerHTML = visible
     .map((org) => {
       const avatar = cached[org.name];
       const img = avatar
@@ -35,6 +57,32 @@ function renderTiles(orgs) {
       `;
     })
     .join("");
+}
+
+function renderManagePanel() {
+  const container = document.getElementById("manage-orgs");
+  if (!container) return;
+  const unsub = readUnsubscribed();
+  container.innerHTML = `
+    <p class="manage-hint">Untick orgs you don't want to see on this page. Stored in this browser only; doesn't affect other viewers.</p>
+    ${ALL_ORGS.map((org) => `
+      <label class="manage-row">
+        <input type="checkbox" data-org="${escapeHtml(org.name)}" ${unsub.has(org.name) ? "" : "checked"}>
+        <span class="manage-label">${escapeHtml(org.label)}</span>
+        <code class="manage-slug">${escapeHtml(org.name)}</code>
+      </label>
+    `).join("")}
+  `;
+  container.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+    cb.addEventListener("change", () => {
+      const slug = cb.dataset.org;
+      const set = readUnsubscribed();
+      if (cb.checked) set.delete(slug);
+      else set.add(slug);
+      writeUnsubscribed(set);
+      renderTiles();
+    });
+  });
 }
 
 async function hydrateAvatars(orgs) {

@@ -37,7 +37,7 @@ That's it. From now on, opening the dashboard in this browser will skip the sign
 
 ## Using the dashboard
 
-- **Entry page** lists the five orgs. Click one to drill in.
+- **Entry page** lists the orgs you're subscribed to. Click one to drill in. Use the **"Manage subscriptions"** panel at the bottom of the entry page to hide orgs you don't care about; new orgs added to `orgs.json` later will appear automatically (subscribed by default). The choice is per-browser, stored in your local storage; it doesn't affect anyone else.
 - **Per-org page** shows a table of every workflow run that is queued or in progress in *that one org*. Repos with nothing happening are hidden — you only see things in motion.
 
 ### The three refresh controls
