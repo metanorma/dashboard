@@ -38,11 +38,20 @@ That's it. From now on, opening the dashboard in this browser will skip the sign
 ## Using the dashboard
 
 - **Entry page** lists the five orgs. Click one to drill in.
-- **Per-org page** shows a table of every workflow run that is queued or in progress. Repos with nothing happening are hidden — you only see things in motion.
-- **Refresh now** re-polls the org immediately.
-- **Auto** dropdown polls every 15, 30, or 60 seconds.
+- **Per-org page** shows a table of every workflow run that is queued or in progress in *that one org*. Repos with nothing happening are hidden — you only see things in motion.
+
+### The three refresh controls
+
+The per-org page does its work in two distinct steps: first it asks GitHub for the **list of repos in the org** (the "repo list"), then for each repo it asks GitHub which workflow runs are currently **queued or in progress** (the "run list"). The repo list is cached for the rest of the browser session because orgs rarely add/remove repos mid-session, and re-fetching ~80 repos every poll would be wasteful. The three refresh controls hit different combinations of these two steps:
+
+- **Refresh now** — re-fetches just the *run list* for every cached repo. Use this when you want a current-state snapshot, e.g. "did that job finish yet?" / "has the queue cleared?". This is the cheap-and-frequent refresh.
+- **Auto (off / 15s / 30s / 60s)** — does exactly the same thing as "Refresh now" automatically on a timer. Off by default. ETag conditional caching means each repeat poll is near-free against the GitHub API rate limit when nothing has changed.
+- **Rescan org** — re-fetches the *repo list* from GitHub, then refreshes the runs. Use this when a repo has been **added to, removed from, renamed in, archived in, or unarchived in** the org since you opened the dashboard. Normal "Refresh now" / "Auto" cycles will NOT pick up such changes because they reuse the cached repo list. Rarely needed in a single sitting.
+
+### Other controls
+
 - **Sort columns** by clicking column headers; default is "longest-running first" so stuck jobs are at the top.
-- **Filter** by repo name, workflow name, and status.
+- **Filter** by repo name, workflow name, and status (in-progress / queued).
 - **"← All orgs"** in the header returns to the entry page.
 - **Sign out** clears the token from this browser; next visit will ask for a new one.
 
