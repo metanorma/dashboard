@@ -103,6 +103,8 @@ Yes, in steady state. ETag revalidation costs zero for unchanged repos, so a 30-
 
 **The dashboard is empty / shows "All quiet".** That means there are genuinely no queued or in-progress runs in that org right now. Try triggering a workflow manually (e.g. `gh workflow run` on any repo) and refresh — it should appear.
 
+**Where did the runs I was watching go?** Once a workflow run transitions out of `in_progress` / `queued` — to success, failure, or cancellation — it disappears from this dashboard, which only shows *currently-active* runs. For completed-run history, open the repo's *Actions* tab on github.com. The dashboard polls automatically on every page entry (including back-button navigation from browser cache), so coming back to an empty table genuinely means there are no active runs at that moment.
+
 **Rate-limit warning in the footer.** The authenticated GitHub API budget is 5000 calls per hour per user. A cold-cache scan of metanorma (the largest org) is roughly **120 calls** with the activity shortlist enabled — down from ~850 before — and steady-state polling is essentially free thanks to ETag conditional caching (304s do not consume budget). The two ways to burn through the budget anyway are (a) repeated hard refreshes of the dashboard, which bust the browser's HTTP cache and force fresh `200` responses, and (b) leaving **include cold repos** ticked, which restores the full ~850-call scan. See *[Rate-limit, refresh cadence, and the ETag cache](#rate-limit-refresh-cadence-and-the-etag-cache)*.
 
 ## Running locally

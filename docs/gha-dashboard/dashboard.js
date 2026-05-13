@@ -360,7 +360,7 @@ function renderTable() {
   if (visible.length === 0) {
     tbody.innerHTML = "";
     document.getElementById("empty-state").style.display = "block";
-    document.getElementById("empty-count").textContent = `0 active runs across ${totalRepos} ${state.org} repos`;
+    document.getElementById("empty-count").textContent = `0 currently-active runs across ${totalRepos} ${state.org} repos (refreshed ${new Date().toLocaleTimeString()})`;
     return;
   }
   document.getElementById("empty-state").style.display = "none";
@@ -459,5 +459,11 @@ function escapeHtml(s) {
   if (s == null) return "";
   return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted && state.org && state.repos.length) {
+    poll();
+  }
+});
 
 main().catch((err) => showError(err.message));

@@ -325,6 +325,7 @@ table#runs {
 }
 .empty-state p:first-child { font-size: 18px; color: var(--text); }
 .empty-count { font-size: 13px; }
+.empty-explanation { font-size: 12px; max-width: 540px; margin: 8px auto 0; line-height: 1.5; }
 
 .error {
   background: rgba(209, 36, 47, 0.08);
