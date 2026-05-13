@@ -6,11 +6,28 @@
 
 const TOKEN_KEY = "metanorma-actions-dashboard.token";
 const USER_KEY = "metanorma-actions-dashboard.user";
-const TOKEN_NEW_URL =
-  "https://github.com/settings/tokens/new?description=Ribose%20GitHub%20Actions%20Dashboard&scopes=repo";
+const SCOPES_KEY = "metanorma-actions-dashboard.scopes";
+export const TOKEN_NEW_URL =
+  "https://github.com/settings/tokens/new?description=Ribose%20GitHub%20Actions%20Dashboard&scopes=repo,read:org";
 
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY);
+}
+
+export function getCachedScopes() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(SCOPES_KEY) || "[]"));
+  } catch (_) {
+    return new Set();
+  }
+}
+
+export function recordScopesFromResponse(res) {
+  if (!res || !res.headers) return;
+  const raw = res.headers.get("X-OAuth-Scopes");
+  if (raw === null) return;
+  const scopes = raw.split(",").map((s) => s.trim()).filter(Boolean);
+  localStorage.setItem(SCOPES_KEY, JSON.stringify(scopes));
 }
 
 export function getCachedUser() {
@@ -36,8 +53,8 @@ function runPatPrompt() {
     overlay.innerHTML = `
       <div class="pat-card">
         <h2>Sign in with a GitHub token</h2>
-        <p>Paste a <strong>personal access token</strong> with the <code>repo</code> scope. The dashboard uses it to list workflow runs across every repo you have access to &mdash; public and private &mdash; in the configured orgs.</p>
-        <p><a href="${TOKEN_NEW_URL}" target="_blank" rel="noopener">Create a token on GitHub &rarr;</a> (the link pre-selects the <code>repo</code> scope).</p>
+        <p>Paste a <strong>personal access token</strong> with the <code>repo</code> and <code>read:org</code> scopes. <code>repo</code> lets the dashboard list workflow runs in repos you have access to (public and private); <code>read:org</code> lets it discover your personal-org memberships so you can add them via the "Manage subscriptions" panel.</p>
+        <p><a href="${TOKEN_NEW_URL}" target="_blank" rel="noopener">Create a token on GitHub &rarr;</a> (the link pre-selects both scopes).</p>
         <input type="password" class="pat-input" placeholder="ghp_&hellip; or github_pat_&hellip;" autocomplete="off" spellcheck="false">
         <button type="button" class="pat-submit">Sign in</button>
         <p class="pat-error" hidden></p>
@@ -89,6 +106,7 @@ async function fetchUser(token) {
   }
   if (res.status === 401) throw new Error("Token rejected by GitHub (401). Double-check it.");
   if (!res.ok) throw new Error(`GET /user failed: ${res.status}`);
+  recordScopesFromResponse(res);
   const body = await res.json();
   return { login: body.login, avatar_url: body.avatar_url };
 }

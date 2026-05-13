@@ -29,7 +29,7 @@ Click the **"Create a token on GitHub →"** link in the sign-in panel. It opens
 - Scroll down and click **Generate token**.
 - Copy the token that appears (starts with `ghp_…`). It is shown **only once** — if you lose it you'll just generate another.
 
-The scope is **`repo`**, which lets the dashboard see workflow runs in both public repos and the private repos you personally have access to. The token cannot do anything the dashboard does not ask GitHub for: it reads workflow run lists, nothing more, and it lives on your machine only.
+The scopes are **`repo`** and **`read:org`**. `repo` lets the dashboard see workflow runs in public repos and the private repos you personally have access to. `read:org` lets it list your GitHub org memberships, so the "Manage subscriptions" panel can offer your personal orgs as opt-in tiles alongside the curated 23. Without `read:org` the dashboard still works for the curated orgs, but the personal-org discovery is limited to your *public* memberships (a non-blocking banner appears on the entry page in that case, with a link to regenerate). The token cannot do anything the dashboard does not ask GitHub for — it reads workflow runs and org memberships, nothing more — and it lives on your machine only.
 
 ### 3. Paste and sign in
 
@@ -39,7 +39,7 @@ That's it. From now on, opening the dashboard in this browser will skip the sign
 
 ## Using the dashboard
 
-- **Entry page** lists the orgs you're subscribed to. Click one to drill in. Use the **"Manage subscriptions"** panel at the bottom of the entry page to hide orgs you don't care about; new orgs added to `orgs.json` later will appear automatically (subscribed by default). The choice is per-browser, stored in your local storage; it doesn't affect anyone else.
+- **Entry page** lists the orgs you're subscribed to. Click one to drill in. Use the **"Manage subscriptions"** panel at the bottom of the entry page to hide orgs you don't care about (curated set) or to add your personal-org memberships (discovered from your GitHub account). Curated orgs are subscribed by default and listed first; personal orgs that aren't in the curated set appear in a separate group under "Your other organizations" and are unsubscribed by default — tick to opt in. New orgs added to `orgs.json` later appear automatically (subscribed by default). All choices are per-browser, stored in your local storage; nothing is shared with other viewers.
 - **Per-org page** shows a table of every workflow run that is queued or in progress in *that one org*. Repos with nothing happening are hidden — you only see things in motion.
 
 ### The three refresh controls
@@ -160,7 +160,10 @@ The PAT in your browser's `localStorage` is scoped per origin. The Pages site (`
 
 ## Adding a new org
 
-If your team works in an org that isn't in the dropdown, open a PR against `docs/gha-dashboard/orgs.json` adding it to the list. The shape is:
+Two paths depending on who needs the org visible:
+
+- **Personal / individual use** — open the **"Manage subscriptions"** panel on the entry page. Under "Your other organizations" you'll see every GitHub org you're a member of that isn't already in the curated list. Tick the ones you want; they appear as tiles on your entry page immediately. The choice is per-browser and doesn't require a PR. (Token needs `read:org` for private memberships; public-only otherwise.)
+- **Shared / team-curated** — for orgs the whole team should see, open a PR against `docs/gha-dashboard/orgs.json` adding it to the list. The shape is:
 
 ```json
 { "name": "your-org-slug", "label": "Display Name" }
