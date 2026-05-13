@@ -97,6 +97,16 @@ main { padding: 16px 24px 48px; }
   cursor: pointer;
 }
 .controls button:hover { background: var(--bg); }
+.controls button.button-secondary {
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  padding: 3px 6px;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+.controls button.button-secondary:hover { color: var(--text); background: var(--bg); border-color: var(--border); text-decoration: none; }
 .filter-bar input[type="search"] { cursor: text; min-width: 220px; }
 
 .control-label { color: var(--muted); font-size: 13px; display: inline-flex; align-items: center; gap: 4px; }
@@ -104,6 +114,7 @@ main { padding: 16px 24px 48px; }
 
 .rate-limit, .status-text, .active-count { color: var(--muted); font-size: 12px; }
 .status-text { min-width: 200px; }
+.active-repo-banner { color: var(--muted); font-size: 12px; margin-top: 8px; }
 
 /* Entry page */
 .org-grid {

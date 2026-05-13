@@ -4,6 +4,8 @@ A live web dashboard showing every GitHub Actions workflow run that is currently
 
 Useful for spotting stuck jobs, coordinating release runs, and getting a quick "is CI healthy across the stack?" snapshot.
 
+> **⚠️ Use the in-page "Refresh now" button, not your browser's reload.** A browser hard-refresh (Ctrl+Shift+R / Cmd+Shift+R) — and a plain reload after the cache has expired — forces the dashboard to re-scan every repo in the org from scratch, on the order of ~120 GitHub API calls in one burst on metanorma (down from ~850 before the activity shortlist landed). Your hourly budget is 5000, so a handful of hard-refreshes in quick succession can still run you out. The in-page **Refresh now** reuses the browser cache and is essentially free — a small handful of calls for runs that have actually changed state since the last poll. See *[Rate-limit, refresh cadence, and the ETag cache](#rate-limit-refresh-cadence-and-the-etag-cache)* below for the full mechanism.
+
 ## Where to find it
 
 - **Public URL** (after a metanorma org owner enables GitHub Pages on this repo): `https://metanorma.github.io/metanorma-release/gha-dashboard/`
@@ -46,7 +48,41 @@ The per-org page does its work in two distinct steps: first it asks GitHub for t
 
 - **Refresh now** — re-fetches just the *run list* for every cached repo. Use this when you want a current-state snapshot, e.g. "did that job finish yet?" / "has the queue cleared?". This is the cheap-and-frequent refresh.
 - **Auto (off / 15s / 30s / 60s)** — does exactly the same thing as "Refresh now" automatically on a timer. Off by default. ETag conditional caching means each repeat poll is near-free against the GitHub API rate limit when nothing has changed.
-- **Rescan org** — re-fetches the *repo list* from GitHub, then refreshes the runs. Use this when a repo has been **added to, removed from, renamed in, archived in, or unarchived in** the org since you opened the dashboard. Normal "Refresh now" / "Auto" cycles will NOT pick up such changes because they reuse the cached repo list. Rarely needed in a single sitting.
+- **Rescan org** — re-fetches the *repo list* from GitHub *and clears the persisted ETag cache*, then refreshes the runs. Use this when a repo has been **added to, removed from, renamed in, archived in, or unarchived in** the org since you opened the dashboard. Normal "Refresh now" / "Auto" cycles will NOT pick up such changes because they reuse the cached repo list. Rarely needed in a single sitting — and **expensive**, since clearing the ETag cache forces a fresh `200` response for every repo on the next poll.
+- **include cold repos** — by default the dashboard skips repos with no push in the last 30 days, since they almost never have queued or in-progress runs. Tick this if you specifically need to catch a `schedule:`-triggered run on an otherwise-idle repo. Doing so re-enables the full org scan and costs proportionally more API budget.
+
+## Rate-limit, refresh cadence, and the ETag cache
+
+The GitHub REST budget for an authenticated user is **5000 calls per hour** in a rolling window, displayed in the footer as `Rate-limit: N / 5000 — resets in Xm`. The dashboard is designed to stay well below that ceiling, *provided* the browser's HTTP cache and the dashboard's own ETag cache are warm. Two facts you need to know to keep it that way:
+
+**1. Within ~60 seconds of any prior fetch, refreshes are completely free.** GitHub returns `Cache-Control: private, max-age=60` on the endpoints we hit. Your browser serves the prior response directly from disk with no network call at all — `X-RateLimit-Remaining` does not move because nothing was sent to GitHub. The flip side is that you also see no new data; hitting "Refresh now" rapid-fire to chase a state change is harmless but pointless.
+
+**2. Past 60 seconds, unchanged repos still cost zero.** The browser sends `If-None-Match` automatically; GitHub returns `304 Not Modified`; and **304 responses do not consume the 5000-per-hour budget**. The only requests that cost anything are repos where a workflow run actually changed state since the last poll — typically a small handful even on a busy day.
+
+### What is expensive
+
+The dashboard has to enumerate repos and ask each one for its run list — there is no org-level "list all active workflow runs" endpoint in either the REST or GraphQL API. So a **cold-cache scan**, where the dashboard genuinely has to fetch fresh `200` responses for every repo in scope, is the only really expensive operation. It happens in four situations:
+
+| When | Cost on metanorma | Mitigation |
+|---|---|---|
+| First visit ever in this browser profile | ~120 calls (activity shortlist) | Falls back to ~60–120 because the 30-day shortlist excludes long-idle repos |
+| Hard refresh (Ctrl+Shift+R / Cmd+Shift+R) | ~120 calls | Use the in-page **Refresh now** button instead — it reuses the browser cache and the ETag map |
+| Clicking **Rescan org** | ~120 calls | Only click it when the repo list itself is stale (a repo was added/renamed/archived). Don't use it to "force a refresh of the runs" — that's what **Refresh now** is for, and it's far cheaper |
+| Browser cache eviction or "Disable cache while DevTools is open" | up to ~120 calls | Don't toggle that DevTools option while using the dashboard — it defeats both the HTTP cache and 304 revalidation |
+| Ticking **include cold repos** | Up to ~850 calls (the full org) | Only tick this when you specifically need to catch a scheduled run on a long-idle repo. Untick it once you're done |
+
+### Keeping the ETag cache warm
+
+The dashboard persists its ETag map in `localStorage` (per-org), so the cache survives navigating away from the dashboard, switching between org pages, and restarting the browser. You don't need to do anything to enable this — it's automatic. The cache is cleared in only two situations:
+
+- You click **Rescan org** (intentional reset for a stale repo list).
+- You clear site data for `metanorma.github.io` (or your local origin if you're running locally). The PAT in `localStorage` is wiped at the same time, so this also signs you out.
+
+Aggressive private/incognito sessions start with an empty cache each time, so each new private session pays the cold-load cost once. Fine for occasional use; avoid as a habit.
+
+### Auto-refresh: is it safe?
+
+Yes, in steady state. ETag revalidation costs zero for unchanged repos, so a 30-second auto-refresh against a quiet org barely moves the rate-limit indicator. A 15-second auto-refresh against a busy org during a heavy CI burst is the worst case — every run-state change costs one `200` — but even then the bound is "a handful of calls per poll", not "hundreds". If the indicator is dropping faster than you expect, that's diagnostic data: it means CI is actually changing state, not that the dashboard is leaking calls.
 
 ### Other controls
 
@@ -67,7 +103,7 @@ The per-org page does its work in two distinct steps: first it asks GitHub for t
 
 **The dashboard is empty / shows "All quiet".** That means there are genuinely no queued or in-progress runs in that org right now. Try triggering a workflow manually (e.g. `gh workflow run` on any repo) and refresh — it should appear.
 
-**Rate-limit warning in the footer.** The authenticated GitHub API budget is 5000 calls per hour per user. A full scan across all five orgs is around 850 calls; you'd need to manually refresh ~5 times per hour to come close. ETag caching on auto-refresh keeps the cost near zero, so this rarely matters in practice.
+**Rate-limit warning in the footer.** The authenticated GitHub API budget is 5000 calls per hour per user. A cold-cache scan of metanorma (the largest org) is roughly **120 calls** with the activity shortlist enabled — down from ~850 before — and steady-state polling is essentially free thanks to ETag conditional caching (304s do not consume budget). The two ways to burn through the budget anyway are (a) repeated hard refreshes of the dashboard, which bust the browser's HTTP cache and force fresh `200` responses, and (b) leaving **include cold repos** ticked, which restores the full ~850-call scan. See *[Rate-limit, refresh cadence, and the ETag cache](#rate-limit-refresh-cadence-and-the-etag-cache)*.
 
 ## Running locally
 

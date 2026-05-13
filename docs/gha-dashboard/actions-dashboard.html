@@ -30,9 +30,11 @@
           <option value="60s">60s</option>
         </select>
       </label>
-      <button type="button" id="rescan-org">Rescan org</button>
+      <label class="control-label" title="By default the dashboard skips repos with no push in the last 30 days, since they're extremely unlikely to have queued or in-progress runs. Enable this to scan every repo in the org (much more expensive against your GitHub API rate-limit)."><input type="checkbox" id="include-cold-repos"> include cold repos</label>
+      <button type="button" id="rescan-org" class="button-secondary" title="Re-fetches the repo list AND clears the persisted ETag cache. Only needed when a repo was added, renamed, or archived in the org since you opened the dashboard. Expensive — forces ~120 fresh GitHub API calls on metanorma. For just refreshing run state, use 'Refresh now' instead.">Rescan org</button>
       <span id="rate-limit" class="rate-limit"></span>
     </div>
+    <div id="active-repo-banner" class="active-repo-banner"></div>
     <div class="filter-bar">
       <input type="search" id="filter-text" placeholder="Filter repo / workflow…">
       <label class="control-label"><input type="checkbox" id="filter-in-progress" checked> in-progress</label>
