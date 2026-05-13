@@ -1,7 +1,10 @@
 import { ensureAuthenticated, getToken, renderAuthHeader } from "./auth.js";
 
 const REPO_CACHE_PREFIX = "metanorma-actions-dashboard.repos.";
-const ETAG_CACHE_PREFIX = "metanorma-actions-dashboard.etag.";
+const ETAG_STORAGE_PREFIX = "metanorma-actions-dashboard.etag-cache.";
+const ETAG_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+const ACTIVE_REPO_WINDOW_DAYS = 30;
+const ACTIVE_REPO_WINDOW_MS = ACTIVE_REPO_WINDOW_DAYS * 24 * 60 * 60 * 1000;
 const STATUSES = ["in_progress", "queued"];
 const CONCURRENCY = 8;
 const REFRESH_INTERVALS = { off: 0, "15s": 15000, "30s": 30000, "60s": 60000 };
@@ -9,12 +12,16 @@ const REFRESH_INTERVALS = { off: 0, "15s": 15000, "30s": 30000, "60s": 60000 };
 const state = {
   org: null,
   repos: [],
+  activeRepos: [],
+  coldRepos: [],
+  includeColdRepos: false,
   rows: [],
   sort: { key: "elapsed", dir: "desc" },
   filter: { text: "", in_progress: true, queued: true },
   rateLimit: { remaining: null, limit: null, reset: null },
   autoRefreshTimer: null,
-  // ETag bodies: { [`${org}/${repo}/${status}`]: { etag, runs } }
+  // ETag bodies: Map keyed by `${org}/${repo}/${status}` → { etag, runs, ts }.
+  // Persisted to localStorage (debounced) so reloads stay 304-cheap.
   etagBodies: new Map(),
 };
 
@@ -36,8 +43,49 @@ async function main() {
   await ensureAuthenticated();
   renderAuthHeader(document.getElementById("auth-header"));
 
+  state.etagBodies = loadETagCache(org);
   wireControls();
   await initialLoad();
+}
+
+function loadETagCache(org) {
+  try {
+    const raw = localStorage.getItem(ETAG_STORAGE_PREFIX + org);
+    if (!raw) return new Map();
+    const obj = JSON.parse(raw);
+    const cutoff = Date.now() - ETAG_TTL_MS;
+    const m = new Map();
+    for (const [k, v] of Object.entries(obj)) {
+      if (v && v.etag && typeof v.ts === "number" && v.ts >= cutoff) m.set(k, v);
+    }
+    return m;
+  } catch (_) {
+    return new Map();
+  }
+}
+
+let saveETagCacheTimer = null;
+function persistETagCache(org) {
+  // Debounce to avoid serialising the whole map on every fetch during a poll burst.
+  if (saveETagCacheTimer) clearTimeout(saveETagCacheTimer);
+  saveETagCacheTimer = setTimeout(() => {
+    try {
+      const obj = {};
+      for (const [k, v] of state.etagBodies.entries()) obj[k] = v;
+      localStorage.setItem(ETAG_STORAGE_PREFIX + org, JSON.stringify(obj));
+    } catch (_) {
+      // Quota or storage disabled — in-memory map still works for this session.
+    }
+  }, 500);
+}
+
+function clearETagCache(org) {
+  state.etagBodies = new Map();
+  try {
+    localStorage.removeItem(ETAG_STORAGE_PREFIX + org);
+  } catch (_) {
+    /* ignore */
+  }
 }
 
 async function loadAllowedOrgs() {
@@ -48,8 +96,16 @@ async function loadAllowedOrgs() {
 
 function wireControls() {
   document.getElementById("refresh-now").addEventListener("click", () => poll());
-  document.getElementById("rescan-org").addEventListener("click", () => initialLoad());
+  document.getElementById("rescan-org").addEventListener("click", () => initialLoad({ rescan: true }));
   document.getElementById("auto-refresh").addEventListener("change", (e) => setAutoRefresh(e.target.value));
+  const coldToggle = document.getElementById("include-cold-repos");
+  if (coldToggle) {
+    coldToggle.addEventListener("change", (e) => {
+      state.includeColdRepos = e.target.checked;
+      renderActiveRepoBanner();
+      poll();
+    });
+  }
   const filterText = document.getElementById("filter-text");
   filterText.addEventListener("input", (e) => {
     state.filter.text = e.target.value.toLowerCase();
@@ -74,15 +130,23 @@ function wireControls() {
   setInterval(tickElapsed, 1000);
 }
 
-async function initialLoad() {
+async function initialLoad({ rescan = false } = {}) {
   setStatus("Loading repo list…");
-  state.etagBodies = new Map();
+  if (rescan) {
+    clearETagCache(state.org);
+    try {
+      sessionStorage.removeItem(REPO_CACHE_PREFIX + state.org);
+    } catch (_) {
+      /* ignore */
+    }
+  }
   try {
     state.repos = await fetchOrgRepos(state.org);
     sessionStorage.setItem(REPO_CACHE_PREFIX + state.org, JSON.stringify(state.repos));
   } catch (err) {
     return showError(`Failed to enumerate repos in ${state.org}: ${err.message}`);
   }
+  partitionRepos();
   await poll();
 }
 
@@ -99,11 +163,42 @@ async function fetchOrgRepos(org) {
     const page = await res.json();
     for (const r of page) {
       if (r.archived || r.disabled) continue;
-      repos.push({ name: r.name, html_url: r.html_url });
+      repos.push({ name: r.name, html_url: r.html_url, pushed_at: r.pushed_at });
     }
     url = parseNextLink(res.headers.get("Link"));
   }
   return repos;
+}
+
+function partitionRepos() {
+  const cutoff = Date.now() - ACTIVE_REPO_WINDOW_MS;
+  state.activeRepos = [];
+  state.coldRepos = [];
+  for (const r of state.repos) {
+    const pushed = r.pushed_at ? new Date(r.pushed_at).getTime() : 0;
+    if (pushed >= cutoff) state.activeRepos.push(r);
+    else state.coldRepos.push(r);
+  }
+  renderActiveRepoBanner();
+}
+
+function reposToPoll() {
+  return state.includeColdRepos ? state.repos : state.activeRepos;
+}
+
+function renderActiveRepoBanner() {
+  const el = document.getElementById("active-repo-banner");
+  if (!el) return;
+  const total = state.repos.length;
+  if (!total) {
+    el.textContent = "";
+    return;
+  }
+  if (state.includeColdRepos) {
+    el.textContent = `Polling all ${total} ${state.org} repos (including ${state.coldRepos.length} idle >${ACTIVE_REPO_WINDOW_DAYS}d).`;
+  } else {
+    el.textContent = `Polling ${state.activeRepos.length} of ${total} ${state.org} repos active in the last ${ACTIVE_REPO_WINDOW_DAYS} days.`;
+  }
 }
 
 function parseNextLink(header) {
@@ -116,10 +211,16 @@ function parseNextLink(header) {
 }
 
 async function poll() {
-  if (!state.repos.length) return;
-  setStatus(`Polling ${state.repos.length} ${state.org} repos…`);
+  const repos = reposToPoll();
+  if (!repos.length) {
+    state.rows = [];
+    setStatus(state.repos.length ? `No repos to poll (toggle cold repos to widen the scan).` : `No repos.`);
+    renderTable();
+    return;
+  }
+  setStatus("Checking…");
   const tasks = [];
-  for (const repo of state.repos) {
+  for (const repo of repos) {
     for (const status of STATUSES) {
       tasks.push({ repo, status });
     }
@@ -158,12 +259,19 @@ async function fetchRunsForRepo(org, repo, status) {
     return cached ? cached.runs : [];
   }
   updateRateLimit(res);
-  if (res.status === 304 && cached) return cached.runs;
+  if (res.status === 304 && cached) {
+    cached.ts = Date.now();
+    persistETagCache(org);
+    return cached.runs;
+  }
   if (!res.ok) return cached ? cached.runs : [];
   const etag = res.headers.get("ETag");
   const body = await res.json();
   const runs = body.workflow_runs || [];
-  if (etag) state.etagBodies.set(cacheKey, { etag, runs });
+  if (etag) {
+    state.etagBodies.set(cacheKey, { etag, runs, ts: Date.now() });
+    persistETagCache(org);
+  }
   return runs;
 }
 
@@ -246,13 +354,13 @@ function renderTable() {
   visible.sort(comparator(state.sort));
 
   const activeRepos = new Set(visible.map((r) => r.repo));
-  const totalRepos = state.repos.length;
+  const totalRepos = reposToPoll().length;
 
   const tbody = document.querySelector("#runs tbody");
   if (visible.length === 0) {
     tbody.innerHTML = "";
     document.getElementById("empty-state").style.display = "block";
-    document.getElementById("empty-count").textContent = `0 active runs across ${totalRepos} ${state.org} repos`;
+    document.getElementById("empty-count").textContent = `0 currently-active runs across ${totalRepos} ${state.org} repos (refreshed ${new Date().toLocaleTimeString()})`;
     return;
   }
   document.getElementById("empty-state").style.display = "none";
@@ -351,5 +459,11 @@ function escapeHtml(s) {
   if (s == null) return "";
   return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted && state.org && state.repos.length) {
+    poll();
+  }
+});
 
 main().catch((err) => showError(err.message));

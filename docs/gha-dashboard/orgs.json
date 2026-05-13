@@ -1,9 +1,27 @@
 {
   "orgs": [
-    { "name": "metanorma",  "label": "Metanorma" },
-    { "name": "relaton",    "label": "Relaton" },
-    { "name": "lutaml",     "label": "LutaML" },
-    { "name": "plurimath",  "label": "Plurimath" },
-    { "name": "claricle",   "label": "Claricle" }
+    { "name": "metanorma",    "label": "Metanorma" },
+    { "name": "relaton",      "label": "Relaton" },
+    { "name": "lutaml",       "label": "LutaML" },
+    { "name": "plurimath",    "label": "Plurimath" },
+    { "name": "claricle",     "label": "Claricle" },
+    { "name": "actions-mn",   "label": "MN Github Actions" },
+    { "name": "capsiums",     "label": "Capsium" },
+    { "name": "confium",      "label": "Confium" },
+    { "name": "fontist",      "label": "Fontist" },
+    { "name": "geolexica",    "label": "Geolexica" },
+    { "name": "glossarist",   "label": "Glossarist" },
+    { "name": "interscript",  "label": "Interscript" },
+    { "name": "ituob",        "label": "ITU Op. Bull." },
+    { "name": "kotoshu",      "label": "Kotoshu" },
+    { "name": "omnizip",      "label": "Omnizip" },
+    { "name": "paneron",      "label": "Paneron" },
+    { "name": "parsanol",     "label": "Parsanol" },
+    { "name": "pubid",        "label": "PubID" },
+    { "name": "riboseinc",    "label": "Ribose" },
+    { "name": "rnpgp",        "label": "RNP" },
+    { "name": "tamatebako",   "label": "Tamatebako" },
+    { "name": "ukiryu",       "label": "Ukiryū" },
+    { "name": "unitsml",      "label": "UnitsML" }
   ]
 }
