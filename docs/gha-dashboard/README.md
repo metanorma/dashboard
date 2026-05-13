@@ -1,6 +1,6 @@
 # Ribose GitHub Actions Dashboard
 
-A live web dashboard showing every GitHub Actions workflow run that is currently **queued** or **in progress** across the orgs we collaborate on: **metanorma**, **relaton**, **lutaml**, **plurimath**, and **claricle**.
+A live web dashboard showing every GitHub Actions workflow run that is currently **queued** or **in progress** across the 23 orgs we collaborate on — **metanorma**, **relaton**, **lutaml**, **plurimath**, **claricle**, plus the Ribose project orgs (actions-mn, capsiums, confium, fontist, geolexica, glossarist, interscript, ituob, kotoshu, omnizip, paneron, parsanol, pubid, riboseinc, rnpgp, tamatebako, ukiryu, unitsml).
 
 Useful for spotting stuck jobs, coordinating release runs, and getting a quick "is CI healthy across the stack?" snapshot.
 
@@ -33,7 +33,7 @@ The scope is **`repo`**, which lets the dashboard see workflow runs in both publ
 
 ### 3. Paste and sign in
 
-Paste the token into the field in the dashboard's sign-in panel and click **Sign in**. After a short verification step you should see five org tiles. Click any of them to see its active runs.
+Paste the token into the field in the dashboard's sign-in panel and click **Sign in**. After a short verification step you should see the curated grid of org tiles. Click any of them to see its active runs.
 
 That's it. From now on, opening the dashboard in this browser will skip the sign-in panel and go straight to the org tiles.
 
