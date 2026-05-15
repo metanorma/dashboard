@@ -180,7 +180,7 @@ We use the https://github.com/metanorma/lapidist[`lapidist`] gem to synchronize 
 
 == Resources
 
-This repo https://github.com/metanorma/metanorma-release[`metanorma-release`] is used as the main building environment.
+This repo https://github.com/metanorma/dashboard[`dashboard`] is used as the main building environment.
 
 It submodules *all* metanorma gems for the release process, and also maintains a gem dependency tree within metanorma (should be easy to automate, or worse to worse manual...).
 
@@ -209,15 +209,13 @@ $ bundle exec lapidist start
 
 === Updating code and integrated testing
 
-. Go to this `metanorma-release` repository
+. Go to this `dashboard` repository
 
 . Run a script to create feature branches in all gems.
 
 . Do the necessary work in the submodule'd (in this repo) `isodoc` and `metanorma-iso`
 
 . Run a script that performs tests on all the gems at once using the newly created feature branches
-
-.. (alt) if you want Travis to test for you, push the `metanorma-release` repository, and Travis will build for you
 
 . When all the gems pass, run a script to make PRs to every repository. If the feature branch for a gem is empty, the script will ignore it.
 

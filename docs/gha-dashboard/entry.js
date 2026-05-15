@@ -191,7 +191,7 @@ function renderManagePanel() {
         ${discoveredRows}
       </div>
     ` : ""}
-    <p class="manage-request">Want more orgs in the curated set? <a href="https://github.com/metanorma/metanorma-release/issues" target="_blank" rel="noopener">Lodge a request</a> in the <code>metanorma-release</code> repo.</p>
+    <p class="manage-request">Want more orgs in the curated set? <a href="https://github.com/metanorma/dashboard/issues" target="_blank" rel="noopener">Lodge a request</a> in the <code>dashboard</code> repo.</p>
   `;
 
   container.querySelectorAll('input[type="checkbox"]').forEach((cb) => {

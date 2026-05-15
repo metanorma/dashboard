@@ -8,7 +8,7 @@ Useful for spotting stuck jobs, coordinating release runs, and getting a quick "
 
 ## Where to find it
 
-- **Public URL** (after a metanorma org owner enables GitHub Pages on this repo): `https://metanorma.github.io/metanorma-release/gha-dashboard/`
+- **Public URL** (after a metanorma org owner enables GitHub Pages on this repo): `https://metanorma.github.io/dashboard/gha-dashboard/`
 - **Local**, from a clone of this repo: see [Running locally](#running-locally) below.
 
 The Pages URL is the one to share with colleagues — no clone needed.
@@ -109,17 +109,17 @@ Yes, in steady state. ETag revalidation costs zero for unchanged repos, so a 30-
 
 ## Running locally
 
-Useful if the Pages URL isn't published yet (because the metanorma-release Pages source hasn't been enabled, or because you want to test the branch before merge), or if you just want to keep a personal copy that doesn't depend on Ribose infrastructure.
+Useful if the Pages URL isn't published yet (because the dashboard Pages source hasn't been enabled, or because you want to test the branch before merge), or if you just want to keep a personal copy that doesn't depend on Ribose infrastructure.
 
 ### Prerequisites
 
 - **Git**, any version.
 - **Python 3**, any version that includes the `http.server` module — preinstalled on macOS and on essentially every Linux distribution. Verify with `python3 --version`.
-- A clone of `metanorma/metanorma-release`. If you don't have one yet:
+- A clone of `metanorma/dashboard`. If you don't have one yet:
 
   ```bash
-  git clone https://github.com/metanorma/metanorma-release.git
-  cd metanorma-release
+  git clone https://github.com/metanorma/dashboard.git
+  cd dashboard
   ```
 
 ### Launching the local web server
@@ -175,4 +175,4 @@ Once merged, the new org tile appears on the entry page automatically.
 
 ## Reporting problems
 
-File an issue on this repo (`metanorma/metanorma-release`) and tag whatever happened. The design ticket for the dashboard is [#29](https://github.com/metanorma/metanorma-release/issues/29); architecture context lives there.
+File an issue on this repo (`metanorma/dashboard`) and tag whatever happened. The design ticket for the dashboard is [#29](https://github.com/metanorma/dashboard/issues/29); architecture context lives there.
