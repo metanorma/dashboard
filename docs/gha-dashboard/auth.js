@@ -42,7 +42,23 @@ export function signOut() {
 
 export async function ensureAuthenticated() {
   const existing = getToken();
-  if (existing) return existing;
+  if (existing) {
+    // Re-verify the cached token before trusting it. Previously this
+    // function returned the cached value unchecked, so a token that had
+    // since expired or been revoked would silently flow through to the
+    // first GitHub API call and surface as a downstream 401 (e.g.
+    // "Failed to enumerate repos in metanorma: 401") rather than as a
+    // clear "your token expired, sign in again" prompt.
+    try {
+      const user = await fetchUser(existing);
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+      return existing;
+    } catch (_) {
+      // Token rejected (expired / revoked / scope changed). Drop the
+      // stale credentials and fall through to the PAT prompt below.
+      signOut();
+    }
+  }
   return runPatPrompt();
 }
 
@@ -95,6 +111,25 @@ function runPatPrompt() {
   });
 }
 
+// Build an Error with GitHub's actual `message` body field (and any SAML SSO
+// hint header) instead of just the bare HTTP status, so callers surface
+// "Bad credentials" / "Resource protected by organization SAML enforcement"
+// rather than a context-free `401`. Exported because dashboard.js uses it
+// at its own API call sites too.
+export async function githubError(res, prefix = "") {
+  let message = res.statusText || `HTTP ${res.status}`;
+  try {
+    const body = await res.json();
+    if (body && body.message) message = body.message;
+  } catch (_) {
+    /* non-JSON body; fall back to statusText */
+  }
+  const sso = res.headers.get("X-GitHub-SSO");
+  if (sso) message += ` [X-GitHub-SSO: ${sso}]`;
+  const label = prefix ? `${prefix}: ` : "";
+  return new Error(`${label}${res.status} ${message}`);
+}
+
 async function fetchUser(token) {
   let res;
   try {
@@ -105,7 +140,7 @@ async function fetchUser(token) {
     throw new Error("Network error reaching api.github.com.");
   }
   if (res.status === 401) throw new Error("Token rejected by GitHub (401). Double-check it.");
-  if (!res.ok) throw new Error(`GET /user failed: ${res.status}`);
+  if (!res.ok) throw await githubError(res, "GET /user failed");
   recordScopesFromResponse(res);
   const body = await res.json();
   return { login: body.login, avatar_url: body.avatar_url };

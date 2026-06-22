@@ -159,7 +159,7 @@ async function fetchOrgRepos(org) {
       headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
     });
     updateRateLimit(res);
-    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    if (!res.ok) throw await githubError(res);
     const page = await res.json();
     for (const r of page) {
       if (r.archived || r.disabled) continue;
